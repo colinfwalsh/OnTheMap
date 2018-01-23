@@ -13,6 +13,12 @@
 		AF1873CD20129CA70073711C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1873CB20129CA70073711C /* LaunchScreen.storyboard */; };
 		AF1873D820129CA70073711C /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1873D720129CA70073711C /* OnTheMapTests.swift */; };
 		AF1873E320129CA70073711C /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1873E220129CA70073711C /* OnTheMapUITests.swift */; };
+		AFC431BF20163BA9002FA72E /* CWMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431BE20163BA9002FA72E /* CWMapViewController.swift */; };
+		AFC431C320163BC4002FA72E /* CWLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C220163BC4002FA72E /* CWLoginViewController.swift */; };
+		AFC431C520163BDC002FA72E /* CWTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C420163BDC002FA72E /* CWTableViewController.swift */; };
+		AFC431C720163BF6002FA72E /* UdacityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C620163BF6002FA72E /* UdacityModel.swift */; };
+		AFC431C920163C05002FA72E /* ParseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C820163C05002FA72E /* ParseModel.swift */; };
+		AFC431CD20163E61002FA72E /* CWTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431CC20163E61002FA72E /* CWTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,12 @@
 		AF1873DE20129CA70073711C /* OnTheMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1873E220129CA70073711C /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		AF1873E420129CA70073711C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFC431BE20163BA9002FA72E /* CWMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWMapViewController.swift; sourceTree = "<group>"; };
+		AFC431C220163BC4002FA72E /* CWLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWLoginViewController.swift; sourceTree = "<group>"; };
+		AFC431C420163BDC002FA72E /* CWTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWTableViewController.swift; sourceTree = "<group>"; };
+		AFC431C620163BF6002FA72E /* UdacityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityModel.swift; sourceTree = "<group>"; };
+		AFC431C820163C05002FA72E /* ParseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseModel.swift; sourceTree = "<group>"; };
+		AFC431CC20163E61002FA72E /* CWTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +109,8 @@
 			children = (
 				AF1873C220129CA70073711C /* AppDelegate.swift */,
 				AF1873C620129CA70073711C /* Main.storyboard */,
+				AFC431CB20163C21002FA72E /* Controllers */,
+				AFC431CA20163C0C002FA72E /* Model */,
 				AF1873C920129CA70073711C /* Assets.xcassets */,
 				AF1873CB20129CA70073711C /* LaunchScreen.storyboard */,
 				AF1873CE20129CA70073711C /* Info.plist */,
@@ -120,6 +134,34 @@
 				AF1873E420129CA70073711C /* Info.plist */,
 			);
 			path = OnTheMapUITests;
+			sourceTree = "<group>";
+		};
+		AFC431CA20163C0C002FA72E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AFC431C620163BF6002FA72E /* UdacityModel.swift */,
+				AFC431C820163C05002FA72E /* ParseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AFC431CB20163C21002FA72E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AFC431C220163BC4002FA72E /* CWLoginViewController.swift */,
+				AFC431BE20163BA9002FA72E /* CWMapViewController.swift */,
+				AFC431C420163BDC002FA72E /* CWTableViewController.swift */,
+				AFC431CE20163E69002FA72E /* Cell */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AFC431CE20163E69002FA72E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AFC431CC20163E61002FA72E /* CWTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC431C720163BF6002FA72E /* UdacityModel.swift in Sources */,
+				AFC431C920163C05002FA72E /* ParseModel.swift in Sources */,
+				AFC431C320163BC4002FA72E /* CWLoginViewController.swift in Sources */,
 				AF1873C320129CA70073711C /* AppDelegate.swift in Sources */,
+				AFC431CD20163E61002FA72E /* CWTableViewCell.swift in Sources */,
+				AFC431BF20163BA9002FA72E /* CWMapViewController.swift in Sources */,
+				AFC431C520163BDC002FA72E /* CWTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
