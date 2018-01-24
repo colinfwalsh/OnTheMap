@@ -14,7 +14,6 @@ class CWLoginViewController: UIViewController {
     
     let udacitySingleton = UdacityAPI.sharedInstance
     let parseSingleton = ParseAPI.sharedInstance
-    var sharedData = ParseModel.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +31,7 @@ class CWLoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    //MARK: ADD ACTIVITY INDICATOR
     @IBAction func loginButtonTapped(_ sender: Any) {
         
         guard let emailText = self.emailTextField.text else {return}
@@ -46,24 +46,10 @@ class CWLoginViewController: UIViewController {
                                             }
                                         }
                                         
-                                        
-                                        self.parseSingleton.getStudentLocations(with: {studentArray in
-                                            
-                                            
-                                            DispatchQueue.main.async {
-                                                self.sharedData.studentArray = studentArray
-                                                self.performSegue(withIdentifier: "transitionToTab", sender: credentials)
-                                            }
-                                        })
-                                        
-                                        
+                                        DispatchQueue.main.async {
+                                            self.performSegue(withIdentifier: "transitionToTab", sender: credentials)
+                                        }
                                         
         })
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let sender = sender {
-            print(sender)
-        }
     }
 }

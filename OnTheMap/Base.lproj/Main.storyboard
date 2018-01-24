@@ -128,6 +128,9 @@
                             <barButtonItem title="Item" image="iconRefresh" id="EI6-Ey-dUT"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="eBR-Wj-Wca" id="f5m-RH-9tu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWK-VD-I2r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
