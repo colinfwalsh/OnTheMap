@@ -14,6 +14,7 @@ class CWLoginViewController: UIViewController {
     
     let udacitySingleton = UdacityAPI.sharedInstance
     let parseSingleton = ParseAPI.sharedInstance
+    var sharedData = ParseModel.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,16 +51,8 @@ class CWLoginViewController: UIViewController {
                                             
                                             
                                             DispatchQueue.main.async {
-                                                
-                                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                                
-                                                let vc = storyboard.instantiateViewController(withIdentifier: "tabBarMain") as! UITabBarController
-                                                
-                                                if let vcs = vc.viewControllers, let nc = vcs.first as? UINavigationController,
-                                                    let tableVC = nc.topViewController as? CWTableViewController, let mapVC = nc.visibleViewController as? CWMapViewController {
-                                                    tableVC.studentLocations = studentArray
-                                                }
-                                                self.present(vc, animated: true, completion: nil)
+                                                self.sharedData.studentArray = studentArray
+                                                self.performSegue(withIdentifier: "transitionToTab", sender: credentials)
                                             }
                                         })
                                         

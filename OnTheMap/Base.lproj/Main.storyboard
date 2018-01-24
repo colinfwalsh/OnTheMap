@@ -47,14 +47,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXR-Wq-xn3">
-                                            <rect key="frame" x="90" y="11" width="124" height="21"/>
+                                            <rect key="frame" x="90" y="11" width="269" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHI-uc-qfQ">
-                                            <rect key="frame" x="90" y="39" width="124" height="21"/>
+                                            <rect key="frame" x="90" y="39" width="269" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -209,11 +209,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="pNE-QY-f8G" id="eCs-vs-F3Y"/>
                         <outlet property="passwordTextField" destination="pbB-rr-wzi" id="nLe-6v-n66"/>
+                        <segue destination="U1Z-Lc-8WZ" kind="show" identifier="transitionToTab" id="V4M-Ks-1qW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uct-Hr-Jr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1402.4000000000001" y="-43.628185907046479"/>
+            <point key="canvasLocation" x="-1546" y="-45"/>
         </scene>
         <!--Item-->
         <scene sceneID="UCq-gw-EoN">

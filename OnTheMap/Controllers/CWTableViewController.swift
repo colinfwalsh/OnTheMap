@@ -13,10 +13,20 @@ class CWTableViewController: UITableViewController {
     let udacitySingleton = UdacityAPI.sharedInstance
     let parseSingleton = ParseAPI.sharedInstance
     
-    var studentLocations: StudentArray!
+    var studentLocations: StudentArray = StudentArray(results: []) {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        parseSingleton.getStudentLocations(with: {studentLocationArray in
+            DispatchQueue.main.async {
+                self.studentLocations = studentLocationArray
+            }
+        })
         
     }
     
@@ -42,8 +52,11 @@ class CWTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cwCell", for: indexPath) as! CWTableViewCell
         
-        cell.nameLabel.text = "Name"
-        cell.urlLabel.text = "Url"
+        if !studentLocations.results.isEmpty {
+            let studentItem = studentLocations.results[indexPath.row]
+            cell.nameLabel.text = (studentItem.firstName ?? "") + " " + (studentItem.lastName ?? "")
+            cell.urlLabel.text = studentItem.mediaURL ?? ""
+        }
         
         return cell
     }
