@@ -32,12 +32,7 @@ class CWTableViewController: UITableViewController {
     
     @IBAction func logoutTapped(_ sender: Any) {
         udacitySingleton.deleteSession()
-        dismissSelf()
-    }
-    
-    private func dismissSelf() {
-        self.navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
+        self.dismissSelf()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
