@@ -7,3 +7,27 @@
 //
 
 import Foundation
+
+
+struct ParseModel {
+    static let sharedInstance = ParseModel()
+    
+    var studentArray: StudentArray = StudentArray(results: [])
+}
+
+struct StudentArray: Codable {
+    var results: [StudentObject]
+}
+
+struct StudentObject: Codable {
+    var createdAt: String
+    var firstName: String?
+    var lastName: String?
+    var latitude: Double?
+    var longitude: Double?
+    var mapString: String?
+    var mediaURL: String?
+    var objectId: String
+    var uniqueKey: String?
+    var updatedAt: String
+}

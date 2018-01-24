@@ -10,19 +10,22 @@ import UIKit
 
 class CWTableViewController: UITableViewController {
     
-    let apiSingleton = UdacityAPI.sharedInstance
-
+    let udacitySingleton = UdacityAPI.sharedInstance
+    let parseSingleton = ParseAPI.sharedInstance
+    
+    var studentLocations: StudentArray!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     @IBAction func logoutTapped(_ sender: Any) {
-        apiSingleton.deleteSession()
+        udacitySingleton.deleteSession()
         dismissSelf()
     }
     
-    func dismissSelf() {
+    private func dismissSelf() {
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
@@ -32,7 +35,8 @@ class CWTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return studentLocations.results.count
+        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

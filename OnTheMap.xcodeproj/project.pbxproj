@@ -13,6 +13,7 @@
 		AF1873CD20129CA70073711C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1873CB20129CA70073711C /* LaunchScreen.storyboard */; };
 		AF1873D820129CA70073711C /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1873D720129CA70073711C /* OnTheMapTests.swift */; };
 		AF1873E320129CA70073711C /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1873E220129CA70073711C /* OnTheMapUITests.swift */; };
+		AF8876582018FE3300687968 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8876572018FE3300687968 /* APIProtocol.swift */; };
 		AFC431BF20163BA9002FA72E /* CWMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431BE20163BA9002FA72E /* CWMapViewController.swift */; };
 		AFC431C320163BC4002FA72E /* CWLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C220163BC4002FA72E /* CWLoginViewController.swift */; };
 		AFC431C520163BDC002FA72E /* CWTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C420163BDC002FA72E /* CWTableViewController.swift */; };
@@ -53,6 +54,7 @@
 		AF1873DE20129CA70073711C /* OnTheMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1873E220129CA70073711C /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		AF1873E420129CA70073711C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF8876572018FE3300687968 /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		AFC431BE20163BA9002FA72E /* CWMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWMapViewController.swift; sourceTree = "<group>"; };
 		AFC431C220163BC4002FA72E /* CWLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWLoginViewController.swift; sourceTree = "<group>"; };
 		AFC431C420163BDC002FA72E /* CWTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWTableViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				AFC431C620163BF6002FA72E /* UdacityModel.swift */,
 				AFC431C820163C05002FA72E /* ParseModel.swift */,
+				AF8876572018FE3300687968 /* APIProtocol.swift */,
 				AFF94D9720180EC000C69B32 /* API */,
 			);
 			path = Model;
@@ -320,6 +323,7 @@
 				AF1873C320129CA70073711C /* AppDelegate.swift in Sources */,
 				AFC431CD20163E61002FA72E /* CWTableViewCell.swift in Sources */,
 				AFC431BF20163BA9002FA72E /* CWMapViewController.swift in Sources */,
+				AF8876582018FE3300687968 /* APIProtocol.swift in Sources */,
 				AFC431C520163BDC002FA72E /* CWTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

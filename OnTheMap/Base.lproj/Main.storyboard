@@ -15,7 +15,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="UUf-xk-Rca">
             <objects>
-                <tabBarController id="U1Z-Lc-8WZ" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarMain" id="U1Z-Lc-8WZ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OdH-tB-HbK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -28,7 +28,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRy-v1-lUX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-542" y="-42"/>
+            <point key="canvasLocation" x="-545" y="-44"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="Gm1-fa-8C6">
@@ -170,7 +170,7 @@
                                 <rect key="frame" x="47" y="245" width="281" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ito-sY-Id6">
                                 <rect key="frame" x="157.5" y="120" width="60" height="60"/>
@@ -209,7 +209,6 @@
                     <connections>
                         <outlet property="emailTextField" destination="pNE-QY-f8G" id="eCs-vs-F3Y"/>
                         <outlet property="passwordTextField" destination="pbB-rr-wzi" id="nLe-6v-n66"/>
-                        <segue destination="U1Z-Lc-8WZ" kind="show" identifier="transitionToTab" id="Xuv-jW-F4l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uct-Hr-Jr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
