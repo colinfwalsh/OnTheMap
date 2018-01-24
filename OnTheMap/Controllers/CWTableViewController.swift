@@ -9,13 +9,24 @@
 import UIKit
 
 class CWTableViewController: UITableViewController {
+    
+    let apiSingleton = UdacityAPI.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
-
+    @IBAction func logoutTapped(_ sender: Any) {
+        apiSingleton.deleteSession()
+        dismissSelf()
+    }
+    
+    func dismissSelf() {
+        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

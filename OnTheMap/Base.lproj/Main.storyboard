@@ -79,7 +79,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="On The Map" id="q5c-gC-lzA">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="VYq-Pz-MgF"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="VYq-Pz-MgF">
+                            <connections>
+                                <action selector="logoutTapped:" destination="le6-P1-VAv" id="iQM-4H-Ph7"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="iconAdd" id="hWQ-nQ-TYj"/>
                             <barButtonItem title="Item" image="iconRefresh" id="Dvd-GP-eUX"/>
@@ -98,21 +102,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2aT-wH-i8j">
-                                <rect key="frame" x="0.0" y="269" width="375" height="128"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eBR-Wj-Wca">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2aT-wH-i8j" firstAttribute="top" secondItem="7YR-dH-pwV" secondAttribute="top" id="Gaw-k8-yCw"/>
-                            <constraint firstItem="2aT-wH-i8j" firstAttribute="leading" secondItem="7YR-dH-pwV" secondAttribute="leading" id="Iwo-yz-xGL"/>
-                            <constraint firstItem="7YR-dH-pwV" firstAttribute="bottom" secondItem="2aT-wH-i8j" secondAttribute="bottom" id="Rie-kf-ycd"/>
-                            <constraint firstItem="2aT-wH-i8j" firstAttribute="trailing" secondItem="7YR-dH-pwV" secondAttribute="trailing" id="euQ-1X-NMM"/>
+                            <constraint firstItem="eBR-Wj-Wca" firstAttribute="centerY" secondItem="7YR-dH-pwV" secondAttribute="centerY" id="QE7-Co-NEB"/>
+                            <constraint firstItem="eBR-Wj-Wca" firstAttribute="top" secondItem="7YR-dH-pwV" secondAttribute="top" id="VCT-lP-jIa"/>
+                            <constraint firstItem="7YR-dH-pwV" firstAttribute="trailing" secondItem="eBR-Wj-Wca" secondAttribute="trailing" id="XfW-FZ-orZ"/>
+                            <constraint firstItem="eBR-Wj-Wca" firstAttribute="centerX" secondItem="7YR-dH-pwV" secondAttribute="centerX" id="lne-PI-TbB"/>
+                            <constraint firstItem="eBR-Wj-Wca" firstAttribute="leading" secondItem="7YR-dH-pwV" secondAttribute="leading" id="poY-Tf-91u"/>
+                            <constraint firstItem="7YR-dH-pwV" firstAttribute="bottom" secondItem="eBR-Wj-Wca" secondAttribute="bottom" id="xDh-DI-t3j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7YR-dH-pwV"/>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="H7R-m9-EBF">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="T4D-eE-FvQ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="T4D-eE-FvQ">
+                            <connections>
+                                <action selector="logoutTapped:" destination="JlK-aB-xqh" id="Esp-qo-eed"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="iconAdd" id="usM-cn-b6w"/>
                             <barButtonItem title="Item" image="iconRefresh" id="EI6-Ey-dUT"/>
@@ -157,7 +167,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbB-rr-wzi">
-                                <rect key="frame" x="47" y="240" width="281" height="30"/>
+                                <rect key="frame" x="47" y="245" width="281" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -170,7 +180,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjK-Ev-d1u">
-                                <rect key="frame" x="47" y="275" width="281" height="30"/>
+                                <rect key="frame" x="47" y="285" width="281" height="30"/>
                                 <color key="backgroundColor" red="0.53337053570000004" green="0.77798549110000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -183,13 +193,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YjK-Ev-d1u" firstAttribute="centerX" secondItem="pbB-rr-wzi" secondAttribute="centerX" id="1rQ-Ub-2XO"/>
-                            <constraint firstItem="pbB-rr-wzi" firstAttribute="top" secondItem="pNE-QY-f8G" secondAttribute="bottom" constant="5" id="7QV-lx-Ivz"/>
+                            <constraint firstItem="pbB-rr-wzi" firstAttribute="top" secondItem="pNE-QY-f8G" secondAttribute="bottom" constant="10" id="7QV-lx-Ivz"/>
                             <constraint firstItem="pNE-QY-f8G" firstAttribute="top" secondItem="ito-sY-Id6" secondAttribute="bottom" constant="25" id="855-lS-pwl"/>
                             <constraint firstItem="pNE-QY-f8G" firstAttribute="width" secondItem="qHF-CO-IwM" secondAttribute="width" multiplier="0.75" id="8Bg-ky-vjM"/>
                             <constraint firstItem="YjK-Ev-d1u" firstAttribute="width" secondItem="pbB-rr-wzi" secondAttribute="width" id="PPh-q8-9u6"/>
                             <constraint firstItem="ito-sY-Id6" firstAttribute="centerX" secondItem="Gge-Zz-0SZ" secondAttribute="centerX" id="UUJ-KA-Giq"/>
                             <constraint firstItem="pNE-QY-f8G" firstAttribute="centerX" secondItem="ito-sY-Id6" secondAttribute="centerX" id="d2h-97-wxL"/>
-                            <constraint firstItem="YjK-Ev-d1u" firstAttribute="top" secondItem="pbB-rr-wzi" secondAttribute="bottom" constant="5" id="mrI-zl-9Hu"/>
+                            <constraint firstItem="YjK-Ev-d1u" firstAttribute="top" secondItem="pbB-rr-wzi" secondAttribute="bottom" constant="10" id="mrI-zl-9Hu"/>
                             <constraint firstItem="pbB-rr-wzi" firstAttribute="centerX" secondItem="pNE-QY-f8G" secondAttribute="centerX" id="ncj-k9-WLz"/>
                             <constraint firstItem="ito-sY-Id6" firstAttribute="top" secondItem="Gge-Zz-0SZ" secondAttribute="top" constant="100" id="o21-Zw-sJt"/>
                             <constraint firstItem="pbB-rr-wzi" firstAttribute="width" secondItem="qHF-CO-IwM" secondAttribute="width" multiplier="0.75" id="rzb-dT-5Ea"/>
@@ -199,6 +209,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="pNE-QY-f8G" id="eCs-vs-F3Y"/>
                         <outlet property="passwordTextField" destination="pbB-rr-wzi" id="nLe-6v-n66"/>
+                        <segue destination="U1Z-Lc-8WZ" kind="show" identifier="transitionToTab" id="Xuv-jW-F4l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uct-Hr-Jr9" userLabel="First Responder" sceneMemberID="firstResponder"/>

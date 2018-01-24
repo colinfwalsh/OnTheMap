@@ -9,13 +9,25 @@
 import UIKit
 
 class CWMapViewController: UIViewController {
-
+    
+    let apiSingleton = UdacityAPI.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func logoutTapped(_ sender: Any) {
+        apiSingleton.deleteSession()
+        backToLogin()
+    }
+    
+    func backToLogin() {
+        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
