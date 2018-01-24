@@ -20,8 +20,21 @@ class CWLoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func presentAlertWith(title: String , message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func loginButtonTapped(_ sender: Any) {
         postLoginWith(completion: {
+            if ($0["error"] != nil) {
+                DispatchQueue.main.async {
+                    self.presentAlertWith(title: "Invalid Credentials", message: "Please try again")
+                }
+            }
+            
             print($0)
         })
     }
@@ -53,6 +66,7 @@ class CWLoginViewController: UIViewController {
                 completion(jsonResult)
             } catch let jsonErr {
                 print("There is an error! \(jsonErr)")
+                completion([:])
             }
             
            
