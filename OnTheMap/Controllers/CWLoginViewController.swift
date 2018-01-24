@@ -21,8 +21,8 @@ class CWLoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     @IBAction func loginButtonTapped(_ sender: Any) {
-        postLoginWith(completion: {_ in
-            //print($0)
+        postLoginWith(completion: {
+            print($0)
         })
     }
     
@@ -35,25 +35,24 @@ class CWLoginViewController: UIViewController {
         guard let emailText = self.emailTextField.text else {return}
         guard let passwordText = self.passwordTextField.text else {return}
         
-        request.httpBody = "{\"udacity\": {\"username\": \"\(testEmail)\", \"password\": \"\(testPassword)\"}}".data(using: .utf8)
+        request.httpBody = "{\"udacity\": {\"username\": \"\(emailText)\", \"password\": \"\(passwordText)\"}}".data(using: .utf8, allowLossyConversion: false)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
                 return
             }
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
             
-            print(String(data: data!, encoding: .utf8)!)
+            //print(String(data: data!, encoding: .utf8)!)
             
-            guard let data = data else {print("Something is wrong with the data"); return}
+            guard let data = newData else {print("Something is wrong with the data"); return}
             let jsonResult : [String : Any]
             do {
-                jsonResult = try JSONSerialization.jsonObject(with: data, options: [.allowFragments, .mutableContainers]) as! [String : Any]
-//                print(try JSONSerialization.isValidJSONObject(data))
-                print(jsonResult)
+                jsonResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : Any]
+                completion(jsonResult)
             } catch let jsonErr {
                 print("There is an error! \(jsonErr)")
-                let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
-                print(userInfo)
             }
             
            
