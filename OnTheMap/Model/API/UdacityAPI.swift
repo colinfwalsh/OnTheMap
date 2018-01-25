@@ -10,15 +10,13 @@ import Foundation
 
 struct UdacityAPI: APIProtocol {
     
-    static let sharedInstance = UdacityAPI()
-    
-    var baseRequest: URLRequest {
+    internal var baseRequest: URLRequest {
         let url = URL(string: "https://www.udacity.com/api/session")
         let request = URLRequest(url: url!)
         return request
     }
     
-    func postLoginWith(emailText: String, passwordText: String, with completion: @escaping ([String : Any], Error?) -> Void) {
+    func postLoginWith(emailText: String, passwordText: String, with completion: @escaping (UdacityCredentials?, Error?) -> Void) {
         var request = baseRequest
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -28,16 +26,42 @@ struct UdacityAPI: APIProtocol {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
-                completion([:], error!)
+                completion(nil, error)
             }
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             
-            completion(self.parseJson(with: newData), nil)
+//            completion(self.parseJson(with: newData), nil)
+           
+            do {
+                let udacityCred = try JSONDecoder().decode(UdacityCredentials.self, from: newData!)
+                completion(udacityCred, nil)
+            } catch let parseErr {
+                completion(nil, parseErr)
+            }
             
         }
         task.resume()
     }
+   
+    func getUserData(userId: String, with completion: @escaping ((UdacityUserDetails?, Error?) -> Void)) {
+        let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(userId)")!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error...
+                completion(nil, error)
+            }
+            let range = Range(5..<data!.count)
+            guard let newData = data?.subdata(in: range) else {return}
+            do {
+                completion(try JSONDecoder().decode(UdacityUserDetails.self, from: newData), nil)
+            } catch let decodeErr {
+                completion(nil, decodeErr)
+            }
+        }
+        task.resume()
+    }
+    
     
     func deleteSession() {
         var request = baseRequest

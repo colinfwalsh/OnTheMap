@@ -187,6 +187,14 @@
                                 <state key="normal" title="Find Location">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="findLocation:" destination="dhH-YW-Do1" eventType="touchUpInside" id="OFo-7Y-Ki1"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="iconWorld" translatesAutoresizingMaskIntoConstraints="NO" id="Q1a-DP-b4A">
                                 <rect key="frame" x="157.5" y="149" width="52" height="67"/>
@@ -278,6 +286,11 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="gQ8-y9-TUe" eventType="touchUpInside" id="sQH-xK-4PY"/>
                                 </connections>
@@ -294,6 +307,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOS-6d-NJU">
                                         <rect key="frame" x="184" y="0.0" width="55" height="30"/>
                                         <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="signUp:" destination="gQ8-y9-TUe" eventType="touchUpInside" id="duw-3y-Fr4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

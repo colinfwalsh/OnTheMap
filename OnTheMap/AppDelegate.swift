@@ -12,14 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let parseSingleton = ParseAPI.sharedInstance
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        self.parseSingleton.getStudentLocations(with: {$0})
-//        self.parseSingleton.getSingleStudentLocation(with: {print($0)})
-    
+
         return true
     }
 

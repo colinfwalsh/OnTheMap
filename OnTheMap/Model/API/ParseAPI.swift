@@ -10,8 +10,6 @@ import Foundation
 
 struct ParseAPI: APIProtocol {
     
-    static let sharedInstance = ParseAPI()
-    
     var baseRequest: URLRequest {
         let url = URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!
         var request = URLRequest(url: url)

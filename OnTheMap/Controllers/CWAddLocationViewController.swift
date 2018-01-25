@@ -9,11 +9,15 @@
 import UIKit
 
 class CWAddLocationViewController: UIViewController {
+    
+    let udacityModel = UdacityModel.sharedInstance
+    let udacityAPI = UdacityAPI()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBarController?.tabBar.isHidden = true
+        
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -21,5 +25,12 @@ class CWAddLocationViewController: UIViewController {
         
         tabBarController?.tabBar.isHidden = false
     }
-
+    
+    @IBAction func findLocation(_ sender: Any) {
+        print((udacityModel.credentials.account?.key)!)
+        udacityAPI.getUserData(userId: (udacityModel.credentials.account?.key)!, with: {
+            print($0, $1)
+        })
+    }
+    
 }

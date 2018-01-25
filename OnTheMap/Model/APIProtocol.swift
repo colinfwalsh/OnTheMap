@@ -9,7 +9,6 @@
 import Foundation
 
 protocol APIProtocol {
-    static var sharedInstance: Self {get}
     var baseRequest: URLRequest {get}
 }
 

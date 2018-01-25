@@ -18,7 +18,7 @@ extension HelperProtocol {
         
         let activityIndicator = UIActivityIndicatorView()
         
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             activityIndicator.activityIndicatorViewStyle = .gray
             activityIndicator.hidesWhenStopped = true
             activityIndicator.center = parentView.center

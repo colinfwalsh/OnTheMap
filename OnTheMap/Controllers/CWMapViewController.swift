@@ -20,8 +20,9 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    let udacitySingleton = UdacityAPI.sharedInstance
-    let parseSingleton = ParseAPI.sharedInstance
+    let udacitySingleton = UdacityAPI()
+    let parseSingleton = ParseAPI()
+    let udacityModel = UdacityModel.sharedInstance
     
     var studentLocations: StudentArray = StudentArray(results: []) {
         didSet {setCoordArray()}
@@ -114,6 +115,7 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
                 with: {self.studentLocations = $0})
         
         mapView.delegate = self
+        print(udacityModel.credentials)
     }
     
     @IBAction func logoutTapped(_ sender: Any) {

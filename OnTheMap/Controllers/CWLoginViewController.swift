@@ -12,21 +12,14 @@ class CWLoginViewController: UIViewController, HelperProtocol {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    let udacitySingleton = UdacityAPI.sharedInstance
-    let parseSingleton = ParseAPI.sharedInstance
+    let udacitySingleton = UdacityAPI()
+    let parseSingleton = ParseAPI()
+    var udacityModel = UdacityModel.sharedInstance
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
+    @IBAction func signUp(_ sender: Any) {
+        let app = UIApplication.shared
+        app.open(URL(string: "https://auth.udacity.com/sign-up")!, options: [:], completionHandler: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    
-    
     //MARK: ADD ACTIVITY INDICATOR AND IMPLEMENT FAILURE TO CONNECT STATUS
     @IBAction func loginButtonTapped(_ sender: Any) {
         
@@ -43,16 +36,20 @@ class CWLoginViewController: UIViewController, HelperProtocol {
         udacitySingleton.postLoginWith(emailText: emailText,
                                        passwordText: passwordText,
                                        with: {(credentials, error) in
-                                        if (credentials["error"] != nil) {
+                                        
+                                        if let status = credentials?.status {
                                             DispatchQueue.main.async {
                                                 activityIndicator.stopAnimating()
-                                                self.presentAlertWith(parentViewController: self, title: "Invalid Credentials", message: "Please try again")
+                                                status != 400 ? self.presentAlertWith(parentViewController: self, title: "Network Error", message: "Cannot connect to the internet") : self.presentAlertWith(parentViewController: self, title: "Invalid Credentials", message: "Please try again")
+                                                
                                             }
-                                        }
-                                        
-                                        DispatchQueue.main.async {
-                                            activityIndicator.stopAnimating()
-                                            self.performSegue(withIdentifier: "transitionToTab", sender: credentials)
+                                        } else {
+                                            DispatchQueue.main.async {
+                                                print(credentials)
+                                                self.udacityModel.credentials = credentials!
+                                                activityIndicator.stopAnimating()
+                                                self.performSegue(withIdentifier: "transitionToTab", sender: (Any).self)
+                                            }
                                         }
                                         
         })

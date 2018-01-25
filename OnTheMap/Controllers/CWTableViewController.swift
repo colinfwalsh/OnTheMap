@@ -10,8 +10,9 @@ import UIKit
 
 class CWTableViewController: UITableViewController, HelperProtocol {
     
-    let udacitySingleton = UdacityAPI.sharedInstance
-    let parseSingleton = ParseAPI.sharedInstance
+    let udacitySingleton = UdacityAPI()
+    let parseSingleton = ParseAPI()
+    let udacityModel = UdacityModel.sharedInstance
     
     var studentLocations: StudentArray = StudentArray(results: []) {
         didSet {
