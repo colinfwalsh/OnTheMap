@@ -47,7 +47,10 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        let cell = tableView.cellForRow(at: indexPath) as! CWTableViewCell
+        
+        checkAndOpen(parentViewController: self, urlString: cell.urlLabel.text!)
+        
     }
 
     override func tableView(_ tableView: UITableView,

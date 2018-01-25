@@ -84,7 +84,7 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .contactAdd)
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {
             pinView!.annotation = annotation
@@ -95,10 +95,8 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
-            }
+            guard let subtitle = view.annotation?.subtitle else {return}
+            checkAndOpen(parentViewController: self, urlString: subtitle!)
         }
     }
     

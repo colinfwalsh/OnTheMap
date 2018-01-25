@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWLoginViewController: UIViewController {
+class CWLoginViewController: UIViewController, HelperProtocol {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -25,11 +25,7 @@ class CWLoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func presentAlertWith(title: String , message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+    
     
     //MARK: ADD ACTIVITY INDICATOR AND IMPLEMENT FAILURE TO CONNECT STATUS
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -50,7 +46,7 @@ class CWLoginViewController: UIViewController {
                                         if (credentials["error"] != nil) {
                                             DispatchQueue.main.async {
                                                 activityIndicator.stopAnimating()
-                                                self.presentAlertWith(title: "Invalid Credentials", message: "Please try again")
+                                                self.presentAlertWith(parentViewController: self, title: "Invalid Credentials", message: "Please try again")
                                             }
                                         }
                                         
