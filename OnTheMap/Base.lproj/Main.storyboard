@@ -85,8 +85,16 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="iconAdd" id="hWQ-nQ-TYj"/>
-                            <barButtonItem title="Item" image="iconRefresh" id="Dvd-GP-eUX"/>
+                            <barButtonItem title="Item" image="iconAdd" id="hWQ-nQ-TYj">
+                                <connections>
+                                    <segue destination="dhH-YW-Do1" kind="show" id="Sex-nB-Qtk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="iconRefresh" id="Dvd-GP-eUX">
+                                <connections>
+                                    <action selector="refresh:" destination="le6-P1-VAv" id="Z3Y-Lv-fMo"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
@@ -124,8 +132,17 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="iconAdd" id="usM-cn-b6w"/>
-                            <barButtonItem title="Item" image="iconRefresh" id="EI6-Ey-dUT"/>
+                            <barButtonItem title="Item" image="iconAdd" id="usM-cn-b6w">
+                                <connections>
+                                    <action selector="addLocation:" destination="JlK-aB-xqh" id="hAR-zc-QlT"/>
+                                    <segue destination="dhH-YW-Do1" kind="show" id="lfd-TY-GtG"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="iconRefresh" id="EI6-Ey-dUT">
+                                <connections>
+                                    <action selector="refresh:" destination="JlK-aB-xqh" id="jJc-mg-G0c"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -135,6 +152,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWK-VD-I2r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1044" y="-548"/>
+        </scene>
+        <!--Add Location View Controller-->
+        <scene sceneID="khT-95-So2">
+            <objects>
+                <viewController id="dhH-YW-Do1" customClass="CWAddLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="o9C-rg-yFm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ra-lb-DLb">
+                                <rect key="frame" x="112.5" y="256" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="XfR-NE-Voo"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yen-Kw-Lfx">
+                                <rect key="frame" x="112.5" y="306" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="ygg-fz-rok"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9u-XL-MwH">
+                                <rect key="frame" x="112" y="357" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="pdE-S7-Exr"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="iconWorld" translatesAutoresizingMaskIntoConstraints="NO" id="Q1a-DP-b4A">
+                                <rect key="frame" x="157.5" y="149" width="55" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Kcj-oV-FSH"/>
+                                    <constraint firstAttribute="width" constant="60" id="osX-7K-ppT"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Yen-Kw-Lfx" firstAttribute="top" secondItem="2Ra-lb-DLb" secondAttribute="bottom" constant="20" id="1KT-KR-TOf"/>
+                            <constraint firstItem="h9u-XL-MwH" firstAttribute="centerX" secondItem="Yen-Kw-Lfx" secondAttribute="centerX" id="AfD-pi-0J3"/>
+                            <constraint firstItem="Yen-Kw-Lfx" firstAttribute="centerX" secondItem="2Ra-lb-DLb" secondAttribute="centerX" id="Tgh-j2-cSZ"/>
+                            <constraint firstItem="2Ra-lb-DLb" firstAttribute="top" secondItem="Q1a-DP-b4A" secondAttribute="bottom" constant="47" id="bNg-rm-HYY"/>
+                            <constraint firstItem="Q1a-DP-b4A" firstAttribute="centerX" secondItem="Vrw-IE-qeo" secondAttribute="centerX" id="gk5-2P-fQ1"/>
+                            <constraint firstItem="h9u-XL-MwH" firstAttribute="top" secondItem="Yen-Kw-Lfx" secondAttribute="bottom" constant="21" id="lFJ-8H-JIj"/>
+                            <constraint firstItem="Q1a-DP-b4A" firstAttribute="top" secondItem="Vrw-IE-qeo" secondAttribute="top" constant="85" id="q9K-hb-GUs"/>
+                            <constraint firstItem="2Ra-lb-DLb" firstAttribute="centerX" secondItem="Q1a-DP-b4A" secondAttribute="centerX" id="qtY-Yn-9sm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Vrw-IE-qeo"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cpm-AX-6mn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2037.5999999999999" y="-83.208395802098963"/>
         </scene>
         <!--Item-->
         <scene sceneID="Vsl-RX-Vyy">
@@ -247,6 +323,10 @@
         <image name="iconMapView_selected" width="75" height="50"/>
         <image name="iconPin" width="24" height="24"/>
         <image name="iconRefresh" width="24" height="24"/>
+        <image name="iconWorld" width="52" height="67"/>
         <image name="logo" width="62" height="62"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Sex-nB-Qtk"/>
+    </inferredMetricsTieBreakers>
 </document>

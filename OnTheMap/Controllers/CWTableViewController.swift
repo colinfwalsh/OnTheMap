@@ -22,11 +22,7 @@ class CWTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        parseSingleton.getStudentLocations(with: {studentLocationArray in
-            DispatchQueue.main.async {
-                self.studentLocations = studentLocationArray
-            }
-        })
+        getData()
         
     }
     
@@ -38,7 +34,23 @@ class CWTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
+    func getData() {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.startAnimating()
+        
+        parseSingleton.getStudentLocations(with: {studentLocationArray in
+            DispatchQueue.main.async {
+                activityIndicator.stopAnimating()
+                self.studentLocations = studentLocationArray
+            }
+        })
+    }
+    @IBAction func refresh(_ sender: Any) {
+       getData()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studentLocations.results.count
         
