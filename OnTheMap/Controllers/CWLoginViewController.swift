@@ -45,7 +45,6 @@ class CWLoginViewController: UIViewController, HelperProtocol {
                                             }
                                         } else {
                                             DispatchQueue.main.async {
-                                                print(credentials)
                                                 self.udacityModel.credentials = credentials!
                                                 activityIndicator.stopAnimating()
                                                 self.performSegue(withIdentifier: "transitionToTab", sender: (Any).self)

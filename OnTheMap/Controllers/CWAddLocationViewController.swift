@@ -27,7 +27,6 @@ class CWAddLocationViewController: UIViewController {
     }
     
     @IBAction func findLocation(_ sender: Any) {
-        print((udacityModel.credentials.account?.key)!)
         udacityAPI.getUserData(userId: (udacityModel.credentials.account?.key)!, with: {
             print($0, $1)
         })
