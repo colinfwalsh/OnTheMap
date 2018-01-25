@@ -31,22 +31,31 @@ class CWLoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    //MARK: ADD ACTIVITY INDICATOR
+    //MARK: ADD ACTIVITY INDICATOR AND IMPLEMENT FAILURE TO CONNECT STATUS
     @IBAction func loginButtonTapped(_ sender: Any) {
         
         guard let emailText = self.emailTextField.text else {return}
         guard let passwordText = self.passwordTextField.text else {return}
         
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         udacitySingleton.postLoginWith(emailText: emailText,
                                        passwordText: passwordText,
-                                       with: {credentials in
+                                       with: {(credentials, error) in
                                         if (credentials["error"] != nil) {
                                             DispatchQueue.main.async {
+                                                activityIndicator.stopAnimating()
                                                 self.presentAlertWith(title: "Invalid Credentials", message: "Please try again")
                                             }
                                         }
                                         
                                         DispatchQueue.main.async {
+                                            activityIndicator.stopAnimating()
                                             self.performSegue(withIdentifier: "transitionToTab", sender: credentials)
                                         }
                                         

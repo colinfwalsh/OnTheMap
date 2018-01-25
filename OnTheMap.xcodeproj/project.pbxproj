@@ -22,6 +22,7 @@
 		AFC431C720163BF6002FA72E /* UdacityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C620163BF6002FA72E /* UdacityModel.swift */; };
 		AFC431C920163C05002FA72E /* ParseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431C820163C05002FA72E /* ParseModel.swift */; };
 		AFC431CD20163E61002FA72E /* CWTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC431CC20163E61002FA72E /* CWTableViewCell.swift */; };
+		AFCC5BA2201A555400E6B272 /* HelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCC5BA1201A555400E6B272 /* HelperProtocol.swift */; };
 		AFF94D9620180EB500C69B32 /* UdacityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF94D9520180EB500C69B32 /* UdacityAPI.swift */; };
 		AFF94D992018149B00C69B32 /* ParseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF94D982018149B00C69B32 /* ParseAPI.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		AFC431C620163BF6002FA72E /* UdacityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityModel.swift; sourceTree = "<group>"; };
 		AFC431C820163C05002FA72E /* ParseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseModel.swift; sourceTree = "<group>"; };
 		AFC431CC20163E61002FA72E /* CWTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWTableViewCell.swift; sourceTree = "<group>"; };
+		AFCC5BA1201A555400E6B272 /* HelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperProtocol.swift; sourceTree = "<group>"; };
 		AFF94D9520180EB500C69B32 /* UdacityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPI.swift; sourceTree = "<group>"; };
 		AFF94D982018149B00C69B32 /* ParseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 				AFC431CB20163C21002FA72E /* Controllers */,
 				AFC431CA20163C0C002FA72E /* Model */,
 				AF88765B2019327900687968 /* UIViewControllerExt.swift */,
+				AFCC5BA1201A555400E6B272 /* HelperProtocol.swift */,
 				AF1873C920129CA70073711C /* Assets.xcassets */,
 				AF1873CB20129CA70073711C /* LaunchScreen.storyboard */,
 				AF1873CE20129CA70073711C /* Info.plist */,
@@ -324,6 +327,7 @@
 				AFF94D9620180EB500C69B32 /* UdacityAPI.swift in Sources */,
 				AF88765C2019327900687968 /* UIViewControllerExt.swift in Sources */,
 				AFC431C720163BF6002FA72E /* UdacityModel.swift in Sources */,
+				AFCC5BA2201A555400E6B272 /* HelperProtocol.swift in Sources */,
 				AFC431C920163C05002FA72E /* ParseModel.swift in Sources */,
 				AFC431C320163BC4002FA72E /* CWLoginViewController.swift in Sources */,
 				AF7F19A7201A43B400200164 /* CWAddLocationViewController.swift in Sources */,

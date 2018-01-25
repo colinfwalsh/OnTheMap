@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWTableViewController: UITableViewController {
+class CWTableViewController: UITableViewController, HelperProtocol {
     
     let udacitySingleton = UdacityAPI.sharedInstance
     let parseSingleton = ParseAPI.sharedInstance
@@ -22,42 +22,38 @@ class CWTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData()
-        
+        getData(parentView: self.view, parseSingleton: parseSingleton, with: {self.studentLocations = $0})
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
         udacitySingleton.deleteSession()
-        self.dismissSelf()
+        dismissSelf()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func getData() {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.activityIndicatorViewStyle = .gray
-        activityIndicator.startAnimating()
-        
-        parseSingleton.getStudentLocations(with: {studentLocationArray in
-            DispatchQueue.main.async {
-                activityIndicator.stopAnimating()
-                self.studentLocations = studentLocationArray
-            }
-        })
-    }
     @IBAction func refresh(_ sender: Any) {
-       getData()
+       getData(parentView: self.view, parseSingleton: parseSingleton, with: {self.studentLocations = $0})
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studentLocations.results.count
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
+        let getStudentCount = studentLocations.results.count
+        return getStudentCount <= 100 ? getStudentCount : 100
         
     }
+    
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cwCell", for: indexPath) as! CWTableViewCell
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cwCell",
+                                                 for: indexPath) as! CWTableViewCell
         
         if !studentLocations.results.isEmpty {
             let studentItem = studentLocations.results[indexPath.row]
@@ -68,7 +64,8 @@ class CWTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView,
+                            heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
 }

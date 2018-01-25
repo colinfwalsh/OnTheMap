@@ -16,10 +16,10 @@ struct ParseModel {
 }
 
 struct StudentArray: Codable {
-    var results: [StudentObject]
+    var results: [StudentInformation]
 }
 
-struct StudentObject: Codable {
+struct StudentInformation: Codable {
     var createdAt: String
     var firstName: String?
     var lastName: String?

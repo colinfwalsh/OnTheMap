@@ -18,7 +18,7 @@ struct UdacityAPI: APIProtocol {
         return request
     }
     
-    func postLoginWith(emailText: String, passwordText: String, with completion: @escaping ([String : Any]) -> Void) {
+    func postLoginWith(emailText: String, passwordText: String, with completion: @escaping ([String : Any], Error?) -> Void) {
         var request = baseRequest
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -28,12 +28,12 @@ struct UdacityAPI: APIProtocol {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
-                return
+                completion([:], error!)
             }
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             
-            completion(self.parseJson(with: newData))
+            completion(self.parseJson(with: newData), nil)
             
         }
         task.resume()

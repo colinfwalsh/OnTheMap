@@ -16,7 +16,7 @@ struct StudentAnnotation {
     let coord: CLLocationCoordinate2D
 }
 
-class CWMapViewController: UIViewController, MKMapViewDelegate {
+class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -24,66 +24,98 @@ class CWMapViewController: UIViewController, MKMapViewDelegate {
     let parseSingleton = ParseAPI.sharedInstance
     
     var studentLocations: StudentArray = StudentArray(results: []) {
-        didSet {
-            if !studentLocations.results.isEmpty {
-                var tempArray: [StudentAnnotation] = []
-                for students in studentLocations.results {
-                    
-                    if let latitude = students.latitude {
-                        if let longitude = students.longitude {
-                            let coord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-                            let name = (students.firstName ?? "") + " " + (students.lastName ?? "")
-                            let url = students.mediaURL ?? ""
-                            tempArray.append(StudentAnnotation(title: name, subTitle: url, coord: coord))
-                        }
-                    }
-                }
-                
-                self.coordArray.append(contentsOf: tempArray)
-            } else {
-                print("Getting no data back!")
-            }        }
+        didSet {setCoordArray()}
     }
     
     var coordArray: [StudentAnnotation] = [] {
-        didSet {
-            for studAnnotation in coordArray {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = studAnnotation.coord
-                annotation.title = studAnnotation.title
-                annotation.subtitle = studAnnotation.subTitle
+        didSet {addAnnotations()}
+    }
+    
+    private func setCoordArray() {
+        if !studentLocations.results.isEmpty {
+            var tempArray: [StudentAnnotation] = []
+            for students in studentLocations.results {
                 
-                self.mapView.addAnnotation(annotation)
-                self.mapView.selectAnnotation(annotation, animated: true)
+                if let latitude = students.latitude {
+                    if let longitude = students.longitude {
+                        let coord: CLLocationCoordinate2D =
+                            CLLocationCoordinate2D(
+                                latitude: CLLocationDegrees(latitude),
+                                longitude: CLLocationDegrees(longitude))
+                        let name = (students.firstName ?? "FIRST") +
+                            " " + (students.lastName ?? "LAST")
+                        let url = students.mediaURL ?? "URL"
+                        tempArray.append(StudentAnnotation(title: name,
+                                                           subTitle: url,
+                                                           coord: coord))
+                    }
+                }
+            }
+            
+            tempArray.count <= 100 ?
+                self.coordArray.append(contentsOf: tempArray) :
+                self.coordArray.append(contentsOf: tempArray[0...99])
+        } else {
+            print("Getting no data back!")
+        }
+    }
+    
+    private func addAnnotations() {
+        var annotationArray: [MKPointAnnotation] = []
+        for studAnnotation in coordArray {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = studAnnotation.coord
+            annotation.title = studAnnotation.title
+            annotation.subtitle = studAnnotation.subTitle
+            
+            annotationArray.append(annotation)
+        }
+        
+        self.mapView.addAnnotations(annotationArray)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .contactAdd)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            if let toOpen = view.annotation?.subtitle! {
+                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
             }
         }
     }
     
     @IBAction func refresh(_ sender: Any) {
-        getData()
-    }
-    
-    @IBAction func addLocation(_ sender: Any) {
+        getData(parentView: self.view,
+                parseSingleton: parseSingleton,
+                with: {self.studentLocations = $0})
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData()
-    }
-    
-    func getData() {
+        getData(parentView: self.view,
+                parseSingleton: parseSingleton,
+                with: {self.studentLocations = $0})
         
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.activityIndicatorViewStyle = .gray
-        activityIndicator.startAnimating()
-        
-        parseSingleton.getStudentLocations(with: {studentLocationArray in
-            DispatchQueue.main.async {
-                self.studentLocations = studentLocationArray
-                activityIndicator.stopAnimating()
-            }
-        })
+        mapView.delegate = self
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
