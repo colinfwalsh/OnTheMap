@@ -59,12 +59,13 @@ struct ParseAPI: APIProtocol {
         
     }
     
-    func postStudentLocation(studentInfo: StudentInformation, with completion: @escaping ([String : Any]) -> Void) {
+    func postStudentLocation(studentInfo: StudentStagingModel, with completion: @escaping ([String : Any]) -> Void) {
         var request = baseRequest
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 //        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
-        request.httpBody = makeBodyString(uniqueKey: studentInfo.uniqueKey ?? "", firstName: studentInfo.firstName ?? "", lastName: studentInfo.lastName ?? "", mapString: studentInfo.mapString ?? "", mediaURL: studentInfo.mediaURL ?? "", latitude: studentInfo.latitude ?? 0.0, longitude: studentInfo.longitude ?? 0.0).data(using: .utf8)
+        
+        request.httpBody = makeBodyString(uniqueKey: studentInfo.uniqueKey ?? "", firstName: studentInfo.firstName ?? "", lastName: studentInfo.lastName ?? "", mapString: studentInfo.mapString ?? "", mediaURL: studentInfo.mediaUrl ?? "", latitude: studentInfo.latitude ?? 0.0, longitude: studentInfo.longitude ?? 0.0).data(using: .utf8)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…

@@ -220,6 +220,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vrw-IE-qeo"/>
                     </view>
+                    <connections>
+                        <outlet property="locationTextField" destination="2Ra-lb-DLb" id="7wl-Ym-DWV"/>
+                        <outlet property="websiteTextField" destination="Yen-Kw-Lfx" id="Cub-g6-wNO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpm-AX-6mn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
