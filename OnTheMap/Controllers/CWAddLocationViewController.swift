@@ -16,14 +16,14 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
     let udacityModel = UdacityModel.sharedInstance
     let udacityAPI = UdacityAPI()
     let parseAPI = ParseAPI()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBarController?.tabBar.isHidden = true
         
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -31,21 +31,39 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
     }
     
     @IBAction func findLocation(_ sender: Any) {
-        verifyStudentData(locationString: locationTextField.text!, urlString: websiteTextField.text!, completion: {
-            self.parseAPI.postStudentLocation(studentInfo: $0, with: { print($0)})
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.startAnimating()
+        verifyStudentData(activityIndicator: activityIndicator, locationString: locationTextField.text!, urlString: websiteTextField.text!, completion: {model in
+            
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "toPostLocation", sender: model)
+            }
+            /*
+             self.parseAPI.postStudentLocation(studentInfo: $0, with: { print($0)})*/
         })
     }
     
     
-    func verifyStudentData(locationString: String, urlString: String, completion: @escaping (StudentStagingModel) -> Void) {
+    func verifyStudentData(activityIndicator: UIActivityIndicatorView, locationString: String, urlString: String, completion: @escaping (StudentStagingModel) -> Void) {
         let dispatchGroup = DispatchGroup()
         let key = (udacityModel.credentials.account?.key)!
         dispatchGroup.enter()
         var firstName: String!
         var lastName: String!
+        
+        DispatchQueue.main.async {
+            if !self.verifyURL(string: urlString) {
+                self.presentAlertWith(parentViewController: self, title: "Invalid URL", message: "Cannot add the url.  Please add 'http://' or https://")
+            }
+        }
+        
         udacityAPI.getUserData(userId: key, with: {
             
             if $1 != nil {
+                DispatchQueue.main.async {
+                    self.presentAlertWith(parentViewController: self, title: "Error", message: "There was an error fetching the user data, please check your network connection and try again.")
+                }
                 return
             }
             
@@ -63,6 +81,9 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
         var long : Double!
         geocoder.geocodeAddressString(locationString, completionHandler: {
             if $1 != nil {
+                DispatchQueue.main.async {
+                    self.presentAlertWith(parentViewController: self, title: "Error", message: "Could not parse location entered.  Try another location or check your spelling.")
+                }
                 return
             }
             
@@ -77,16 +98,15 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
             dispatchGroup.leave()
         })
         
-        if !verifyURL(string: urlString) {
-            presentAlertWith(parentViewController: self, title: "Invalid URL", message: "Cannot add the url.  Please add 'http://' or https://")
-        }
-        
         dispatchGroup.notify(queue: .main, execute: {
+            activityIndicator.stopAnimating()
             let stage = StudentStagingModel(uniqueKey: key, firstName: firstName, lastName: lastName, mapString: mapString, mediaUrl: urlString, latitude: lat, longitude: long)
             completion(stage)
         })
+        
+        
     }
- 
+    
     
     func verifyURL(string: String) -> Bool {
         if string.range(of: "http://") != nil || string.range(of: "https://") != nil {
@@ -95,11 +115,12 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
             return false
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! CWFinishLocationViewController
+        destination.stagingModel = sender as! StudentStagingModel
+    }
 }
-
-/*
- \"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}
- */
 
 struct StudentStagingModel {
     let uniqueKey: String?

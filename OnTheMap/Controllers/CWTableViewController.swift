@@ -10,8 +10,8 @@ import UIKit
 
 class CWTableViewController: UITableViewController, HelperProtocol {
     
-    let udacitySingleton = UdacityAPI()
-    let parseSingleton = ParseAPI()
+    let udacityInstance = UdacityAPI()
+    let parseInstance = ParseAPI()
     let udacityModel = UdacityModel.sharedInstance
     
     var studentLocations: StudentArray = StudentArray(results: []) {
@@ -23,11 +23,11 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData(parentView: self.view, parseSingleton: parseSingleton, with: {self.studentLocations = $0})
+        getData(parentView: self.view, parseSingleton: parseInstance, with: {self.studentLocations = $0})
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
-        udacitySingleton.deleteSession()
+        udacityInstance.deleteSession()
         dismissSelf()
     }
     
@@ -36,7 +36,7 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     }
     
     @IBAction func refresh(_ sender: Any) {
-       getData(parentView: self.view, parseSingleton: parseSingleton, with: {self.studentLocations = $0})
+       getData(parentView: self.view, parseSingleton: parseInstance, with: {self.studentLocations = $0})
     }
     
     override func tableView(_ tableView: UITableView,

@@ -20,8 +20,8 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    let udacitySingleton = UdacityAPI()
-    let parseSingleton = ParseAPI()
+    let udacityInstance = UdacityAPI()
+    let parseInstance = ParseAPI()
     let udacityModel = UdacityModel.sharedInstance
     
     var studentLocations: StudentArray = StudentArray(results: []) {
@@ -103,7 +103,7 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     
     @IBAction func refresh(_ sender: Any) {
         getData(parentView: self.view,
-                parseSingleton: parseSingleton,
+                parseSingleton: parseInstance,
                 with: {self.studentLocations = $0})
     }
     
@@ -111,7 +111,7 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
         super.viewDidLoad()
         
         getData(parentView: self.view,
-                parseSingleton: parseSingleton,
+                parseSingleton: parseInstance,
                 with: {self.studentLocations = $0})
         
         mapView.delegate = self
@@ -119,7 +119,8 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
-        udacitySingleton.deleteSession()
+        udacityInstance
+        .deleteSession()
         dismissSelf()
     }
 }

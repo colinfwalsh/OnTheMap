@@ -13,6 +13,7 @@
 		AF1873CD20129CA70073711C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1873CB20129CA70073711C /* LaunchScreen.storyboard */; };
 		AF1873D820129CA70073711C /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1873D720129CA70073711C /* OnTheMapTests.swift */; };
 		AF1873E320129CA70073711C /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1873E220129CA70073711C /* OnTheMapUITests.swift */; };
+		AF6807672028A89D000B421E /* CWFinishLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6807662028A89D000B421E /* CWFinishLocationViewController.swift */; };
 		AF7F19A7201A43B400200164 /* CWAddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F19A6201A43B400200164 /* CWAddLocationViewController.swift */; };
 		AF8876582018FE3300687968 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8876572018FE3300687968 /* APIProtocol.swift */; };
 		AF88765C2019327900687968 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88765B2019327900687968 /* UIViewControllerExt.swift */; };
@@ -57,6 +58,7 @@
 		AF1873DE20129CA70073711C /* OnTheMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1873E220129CA70073711C /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		AF1873E420129CA70073711C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF6807662028A89D000B421E /* CWFinishLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWFinishLocationViewController.swift; sourceTree = "<group>"; };
 		AF7F19A6201A43B400200164 /* CWAddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWAddLocationViewController.swift; sourceTree = "<group>"; };
 		AF8876572018FE3300687968 /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		AF88765B2019327900687968 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				AFC431BE20163BA9002FA72E /* CWMapViewController.swift */,
 				AFC431C420163BDC002FA72E /* CWTableViewController.swift */,
 				AF7F19A6201A43B400200164 /* CWAddLocationViewController.swift */,
+				AF6807662028A89D000B421E /* CWFinishLocationViewController.swift */,
 				AFC431CE20163E69002FA72E /* Cell */,
 			);
 			path = Controllers;
@@ -328,6 +331,7 @@
 				AF88765C2019327900687968 /* UIViewControllerExt.swift in Sources */,
 				AFC431C720163BF6002FA72E /* UdacityModel.swift in Sources */,
 				AFCC5BA2201A555400E6B272 /* HelperProtocol.swift in Sources */,
+				AF6807672028A89D000B421E /* CWFinishLocationViewController.swift in Sources */,
 				AFC431C920163C05002FA72E /* ParseModel.swift in Sources */,
 				AFC431C320163BC4002FA72E /* CWLoginViewController.swift in Sources */,
 				AF7F19A7201A43B400200164 /* CWAddLocationViewController.swift in Sources */,

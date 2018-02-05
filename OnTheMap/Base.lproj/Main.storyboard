@@ -102,6 +102,57 @@
             </objects>
             <point key="canvasLocation" x="1044" y="365.66716641679164"/>
         </scene>
+        <!--Finish Location View Controller-->
+        <scene sceneID="vuv-5f-GUU">
+            <objects>
+                <viewController id="REx-x4-ZMC" customClass="CWFinishLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3n0-Js-hQv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="CCk-tE-ys8">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oty-SV-bfp">
+                                <rect key="frame" x="47" y="558" width="281" height="40"/>
+                                <color key="backgroundColor" red="0.53337053570000004" green="0.77798549110000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="36i-zl-OPG"/>
+                                </constraints>
+                                <state key="normal" title="Finish">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="findLocation:" destination="dhH-YW-Do1" eventType="touchUpInside" id="XcR-h6-CI6"/>
+                                    <action selector="finishButtonTapped:" destination="REx-x4-ZMC" eventType="touchUpInside" id="mFi-hQ-rTb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Oty-SV-bfp" firstAttribute="centerX" secondItem="CCk-tE-ys8" secondAttribute="centerX" id="A64-uR-P0w"/>
+                            <constraint firstItem="CCk-tE-ys8" firstAttribute="top" secondItem="LK6-Qr-zWy" secondAttribute="top" id="DJH-N9-nm2"/>
+                            <constraint firstItem="CCk-tE-ys8" firstAttribute="bottom" secondItem="LK6-Qr-zWy" secondAttribute="bottom" id="Jua-Vd-7eU"/>
+                            <constraint firstItem="CCk-tE-ys8" firstAttribute="trailing" secondItem="LK6-Qr-zWy" secondAttribute="trailing" id="aQ8-ZQ-0vw"/>
+                            <constraint firstItem="Oty-SV-bfp" firstAttribute="width" secondItem="CCk-tE-ys8" secondAttribute="width" multiplier="0.75" id="io9-8Z-i1d"/>
+                            <constraint firstItem="CCk-tE-ys8" firstAttribute="leading" secondItem="LK6-Qr-zWy" secondAttribute="leading" id="qNR-YM-0EF"/>
+                            <constraint firstItem="LK6-Qr-zWy" firstAttribute="bottom" secondItem="Oty-SV-bfp" secondAttribute="bottom" constant="20" id="xaP-WL-2uQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LK6-Qr-zWy"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="CCk-tE-ys8" id="HJu-rM-nlK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q8D-EQ-3Cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2848.8000000000002" y="-83.208395802098963"/>
+        </scene>
         <!--On The Map-->
         <scene sceneID="Wxb-yo-Wc9">
             <objects>
@@ -223,6 +274,7 @@
                     <connections>
                         <outlet property="locationTextField" destination="2Ra-lb-DLb" id="7wl-Ym-DWV"/>
                         <outlet property="websiteTextField" destination="Yen-Kw-Lfx" id="Cub-g6-wNO"/>
+                        <segue destination="REx-x4-ZMC" kind="show" identifier="toPostLocation" id="kEg-VE-aUE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpm-AX-6mn" userLabel="First Responder" sceneMemberID="firstResponder"/>

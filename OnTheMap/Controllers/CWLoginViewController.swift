@@ -12,8 +12,8 @@ class CWLoginViewController: UIViewController, HelperProtocol {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    let udacitySingleton = UdacityAPI()
-    let parseSingleton = ParseAPI()
+    let udacityInstance = UdacityAPI()
+    let parseInstance = ParseAPI()
     var udacityModel = UdacityModel.sharedInstance
     
     @IBAction func signUp(_ sender: Any) {
@@ -33,7 +33,7 @@ class CWLoginViewController: UIViewController, HelperProtocol {
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        udacitySingleton.postLoginWith(emailText: emailText,
+        udacityInstance.postLoginWith(emailText: emailText,
                                        passwordText: passwordText,
                                        with: {(credentials, error) in
                                         
