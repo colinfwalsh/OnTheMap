@@ -23,7 +23,14 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData(parentView: self.view, parseSingleton: parseInstance, with: {self.studentLocations = $0})
+        getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
+            
+            if let error = error as? CWError {
+                DispatchQueue.main.async {
+                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
+                }
+            } else {self.studentLocations = studentArray!}
+        })
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
@@ -36,7 +43,18 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     }
     
     @IBAction func refresh(_ sender: Any) {
-       getData(parentView: self.view, parseSingleton: parseInstance, with: {self.studentLocations = $0})
+       getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
+        
+            if let error = error as? CWError {
+                DispatchQueue.main.async {
+                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
+                }
+            } else {
+                self.studentLocations = studentArray!
+        }
+        
+       
+       })
     }
     
     override func tableView(_ tableView: UITableView,

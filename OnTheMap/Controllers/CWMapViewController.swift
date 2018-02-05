@@ -102,17 +102,27 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        getData(parentView: self.view,
-                parseSingleton: parseInstance,
-                with: {self.studentLocations = $0})
+        getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
+            
+            if let error = error as? CWError {
+                DispatchQueue.main.async {
+                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
+                }
+            } else {self.studentLocations = studentArray!}
+        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData(parentView: self.view,
-                parseSingleton: parseInstance,
-                with: {self.studentLocations = $0})
+        getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
+            
+            if let error = error as? CWError {
+                DispatchQueue.main.async {
+                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
+                }
+            } else {self.studentLocations = studentArray!}
+        })
         
         mapView.delegate = self
         print(udacityModel.credentials)

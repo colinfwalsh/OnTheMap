@@ -14,7 +14,7 @@ protocol HelperProtocol {
 }
 
 extension HelperProtocol {
-    func getData(parentView: UIView, parseSingleton: ParseAPI, with completion: @escaping (StudentArray) -> Void) {
+    func getData(parentView: UIView, parseSingleton: ParseAPI, with completion: @escaping (StudentArray?, Error?) -> Void) {
         
         let activityIndicator = UIActivityIndicatorView()
         
@@ -30,9 +30,9 @@ extension HelperProtocol {
             DispatchQueue.main.async {
                 activityIndicator.stopAnimating()
                 if let studentLocationArray = studentLocationArray {
-                    completion(studentLocationArray)
+                    completion(studentLocationArray, nil)
                 } else {
-                    print(error!)
+                    completion(nil, CWError.serverError)
                 }
             }
         })

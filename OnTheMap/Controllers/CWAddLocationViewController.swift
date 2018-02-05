@@ -17,53 +17,81 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
     let udacityAPI = UdacityAPI()
     let parseAPI = ParseAPI()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        subscribe()
         tabBarController?.tabBar.isHidden = true
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        unsubscribe()
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if websiteTextField.isFirstResponder {
+            view.frame.origin.y -= getKeyboardHeight(notification)/4
+        } else {
+            view.frame.origin.y -= getKeyboardHeight(notification)/6
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.cgRectValue.height
+    }
+    
+    @objc func subscribe() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribe() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
     @IBAction func findLocation(_ sender: Any) {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.activityIndicatorViewStyle = .gray
         activityIndicator.startAnimating()
-        verifyStudentData(activityIndicator: activityIndicator, locationString: locationTextField.text!, urlString: websiteTextField.text!, completion: {model in
+        verifyStudentData(activityIndicator: activityIndicator, locationString: locationTextField.text!, urlString: websiteTextField.text!, completion: {model,error in
             
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "toPostLocation", sender: model)
+                if error != nil {
+                    let error = error as! CWError
+                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
+                    return
+                } else {
+                    self.performSegue(withIdentifier: "toPostLocation", sender: model)
+                }
             }
-            /*
-             self.parseAPI.postStudentLocation(studentInfo: $0, with: { print($0)})*/
         })
     }
     
-    
-    func verifyStudentData(activityIndicator: UIActivityIndicatorView, locationString: String, urlString: String, completion: @escaping (StudentStagingModel) -> Void) {
+    func verifyStudentData(activityIndicator: UIActivityIndicatorView, locationString: String, urlString: String, completion: @escaping (StudentStagingModel?, Error?) -> Void) {
         let dispatchGroup = DispatchGroup()
         let key = (udacityModel.credentials.account?.key)!
         dispatchGroup.enter()
         var firstName: String!
         var lastName: String!
         
-        DispatchQueue.main.async {
-            if !self.verifyURL(string: urlString) {
-                self.presentAlertWith(parentViewController: self, title: "Invalid URL", message: "Cannot add the url.  Please add 'http://' or https://")
-            }
+        if !self.verifyURL(string: urlString) {
+            completion(nil, CWError.urlError)
+            return
         }
         
         udacityAPI.getUserData(userId: key, with: {
             
             if $1 != nil {
-                DispatchQueue.main.async {
-                    self.presentAlertWith(parentViewController: self, title: "Error", message: "There was an error fetching the user data, please check your network connection and try again.")
-                }
+                completion(nil, CWError.userDataError)
                 return
             }
             
@@ -81,9 +109,7 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
         var long : Double!
         geocoder.geocodeAddressString(locationString, completionHandler: {
             if $1 != nil {
-                DispatchQueue.main.async {
-                    self.presentAlertWith(parentViewController: self, title: "Error", message: "Could not parse location entered.  Try another location or check your spelling.")
-                }
+                completion(nil, CWError.locationError)
                 return
             }
             
@@ -101,13 +127,10 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
         dispatchGroup.notify(queue: .main, execute: {
             activityIndicator.stopAnimating()
             let stage = StudentStagingModel(uniqueKey: key, firstName: firstName, lastName: lastName, mapString: mapString, mediaUrl: urlString, latitude: lat, longitude: long)
-            completion(stage)
+            completion(stage, nil)
         })
-        
-        
     }
-    
-    
+
     func verifyURL(string: String) -> Bool {
         if string.range(of: "http://") != nil || string.range(of: "https://") != nil {
             return true

@@ -59,7 +59,7 @@ struct ParseAPI: APIProtocol {
         
     }
     
-    func postStudentLocation(studentInfo: StudentStagingModel, with completion: @escaping ([String : Any]) -> Void) {
+    func postStudentLocation(studentInfo: StudentStagingModel, with completion: @escaping ([String : Any], Error?) -> Void) {
         var request = baseRequest
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -67,10 +67,11 @@ struct ParseAPI: APIProtocol {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
+                completion([:], CWError.serverError)
                 return
             }
             
-            completion(self.parseJson(with: data))
+            completion(self.parseJson(with: data), nil)
         }
         task.resume()
     }

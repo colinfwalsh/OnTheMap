@@ -390,6 +390,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="pNE-QY-f8G" id="eCs-vs-F3Y"/>
+                        <outlet property="loginButton" destination="YjK-Ev-d1u" id="NEB-1x-7Jw"/>
                         <outlet property="passwordTextField" destination="pbB-rr-wzi" id="nLe-6v-n66"/>
                         <segue destination="U1Z-Lc-8WZ" kind="show" identifier="transitionToTab" id="V4M-Ks-1qW"/>
                     </connections>
