@@ -61,22 +61,26 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
     @IBAction func findLocation(_ sender: Any) {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        verifyStudentData(activityIndicator: activityIndicator, locationString: locationTextField.text!, urlString: websiteTextField.text!, completion: {model,error in
+        verifyStudentData(locationString: locationTextField.text!, urlString: websiteTextField.text!, completion: {model,error in
             
             DispatchQueue.main.async {
                 if error != nil {
                     let error = error as! CWError
+                    activityIndicator.stopAnimating()
                     self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
                     return
                 } else {
+                    activityIndicator.stopAnimating()
                     self.performSegue(withIdentifier: "toPostLocation", sender: model)
                 }
             }
         })
     }
     
-    func verifyStudentData(activityIndicator: UIActivityIndicatorView, locationString: String, urlString: String, completion: @escaping (StudentStagingModel?, Error?) -> Void) {
+    func verifyStudentData(locationString: String, urlString: String, completion: @escaping (StudentStagingModel?, Error?) -> Void) {
         let dispatchGroup = DispatchGroup()
         let key = (udacityModel.credentials.account?.key)!
         dispatchGroup.enter()
@@ -125,7 +129,6 @@ class CWAddLocationViewController: UIViewController, HelperProtocol {
         })
         
         dispatchGroup.notify(queue: .main, execute: {
-            activityIndicator.stopAnimating()
             let stage = StudentStagingModel(uniqueKey: key, firstName: firstName, lastName: lastName, mapString: mapString, mediaUrl: urlString, latitude: lat, longitude: long)
             completion(stage, nil)
         })

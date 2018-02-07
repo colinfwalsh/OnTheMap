@@ -19,7 +19,6 @@ struct ParseAPI: APIProtocol {
     }
     
     func getStudentLocations(with completion: @escaping (StudentArray?, Error?) -> Void) {
-        
         let request = baseRequest
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in

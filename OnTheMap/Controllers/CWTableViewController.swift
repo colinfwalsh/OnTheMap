@@ -59,8 +59,7 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        let getStudentCount = studentLocations.results.count
-        return getStudentCount <= 100 ? getStudentCount : 100
+        return studentLocations.results.count
         
     }
     
