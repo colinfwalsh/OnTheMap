@@ -85,9 +85,15 @@ class CWLoginViewController: UIViewController, HelperProtocol {
                                             }
                                         } else {
                                             DispatchQueue.main.async {
-                                                self.udacityModel.credentials = credentials!
-                                                activityIndicator.stopAnimating()
-                                                self.performSegue(withIdentifier: "transitionToTab", sender: (Any).self)
+                                                if let credentials = credentials {
+                                                    self.udacityModel.credentials = credentials
+                                                    activityIndicator.stopAnimating()
+                                                    self.performSegue(withIdentifier: "transitionToTab", sender: (Any).self)
+                                                } else {
+                                                    self.presentAlertWith(parentViewController: self, title: "No internet", message: "Please connect to the internet and try again")
+                                                    activityIndicator.stopAnimating()
+                                                }
+                                                
                                             }
                                         }
                                         

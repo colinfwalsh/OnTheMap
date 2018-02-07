@@ -19,8 +19,10 @@ struct ParseAPI: APIProtocol {
     }
     
     func getStudentLocations(with completion: @escaping (StudentArray?, Error?) -> Void) {
-        let request = baseRequest
+        var request = baseRequest
         let session = URLSession.shared
+        request.addValue("100", forHTTPHeaderField: "limit")
+        request.addValue("updatedAt", forHTTPHeaderField: "order")
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
                 completion(nil, error)

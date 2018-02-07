@@ -27,6 +27,7 @@ struct UdacityAPI: APIProtocol {
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
                 completion(nil, error)
+                return
             }
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
@@ -50,6 +51,7 @@ struct UdacityAPI: APIProtocol {
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error...
                 completion(nil, error)
+                return
             }
             let range = Range(5..<data!.count)
             guard let newData = data?.subdata(in: range) else {return}

@@ -125,7 +125,6 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
         })
         
         mapView.delegate = self
-        print(udacityModel.credentials)
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
