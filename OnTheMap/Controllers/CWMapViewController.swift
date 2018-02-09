@@ -23,9 +23,10 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     let udacityInstance = UdacityAPI()
     let parseInstance = ParseAPI()
     let udacityModel = UdacityModel.sharedInstance
-    
-    var studentLocations: StudentArray = StudentArray(results: []) {
-        didSet {setCoordArray()}
+    var parseModel = ParseModel.sharedInstance {
+        didSet {
+            setCoordArray()
+        }
     }
     
     var coordArray: [StudentAnnotation] = [] {
@@ -33,9 +34,9 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     }
     
     private func setCoordArray() {
-        if !studentLocations.results.isEmpty {
+        if !parseModel.studentArray.results.isEmpty {
             var tempArray: [StudentAnnotation] = []
-            for students in studentLocations.results {
+            for students in parseModel.studentArray.results {
                 
                 if let latitude = students.latitude {
                     if let longitude = students.longitude {
@@ -53,9 +54,7 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
                 }
             }
             
-            tempArray.count <= 100 ?
-                self.coordArray.append(contentsOf: tempArray) :
-                self.coordArray.append(contentsOf: tempArray[0...99])
+            self.coordArray.append(contentsOf: tempArray)
         } else {
             print("Getting no data back!")
         }
@@ -102,34 +101,26 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
-            
-            if let error = error as? CWError {
+        getData(parentView: self.view, parseInstance: parseInstance) { (studentArray, error) in
+            if let studentArray = studentArray {
+            self.parseModel.studentArray = studentArray
+            } else {
                 DispatchQueue.main.async {
-                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
+                    self.presentAlertWith(parentViewController: self, title: CWError.serverError.title, message: CWError.serverError.description)
                 }
-            } else {self.studentLocations = studentArray!}
-        })
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
-            
-            if let error = error as? CWError {
-                DispatchQueue.main.async {
-                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
-                }
-            } else {self.studentLocations = studentArray!}
-        })
-        
+        setCoordArray()
         mapView.delegate = self
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
         udacityInstance
-        .deleteSession()
+            .deleteSession()
         dismissSelf()
     }
 }

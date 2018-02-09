@@ -14,7 +14,7 @@ protocol HelperProtocol {
 }
 
 extension HelperProtocol {
-    func getData(parentView: UIView, parseSingleton: ParseAPI, with completion: @escaping (StudentArray?, Error?) -> Void) {
+    func getData(parentView: UIView, parseInstance: ParseAPI, with completion: @escaping (StudentArray?, Error?) -> Void) {
         
         let activityIndicator = UIActivityIndicatorView()
         
@@ -26,7 +26,7 @@ extension HelperProtocol {
             activityIndicator.startAnimating()
         }
         
-        parseSingleton.getStudentLocations(with: {(studentLocationArray, error) in
+        parseInstance.getStudentLocations(with: {(studentLocationArray, error) in
             DispatchQueue.main.async {
                 activityIndicator.stopAnimating()
                 if let studentLocationArray = studentLocationArray {

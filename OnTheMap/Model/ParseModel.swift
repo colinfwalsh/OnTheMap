@@ -9,9 +9,8 @@
 import Foundation
 
 
-struct ParseModel {
+class ParseModel {
     static let sharedInstance = ParseModel()
-    
     var studentArray: StudentArray = StudentArray(results: [])
 }
 

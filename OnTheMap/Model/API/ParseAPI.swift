@@ -26,6 +26,7 @@ struct ParseAPI: APIProtocol {
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
                 completion(nil, error)
+                return
             }
             let (studentArray, err) = self.getStudentLocationArray(with: data)
             completion(studentArray, err)
@@ -39,6 +40,7 @@ struct ParseAPI: APIProtocol {
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
                 completion(nil, error)
+                return
             }
             
             let (studentArray, err) = self.getStudentLocationArray(with: data)

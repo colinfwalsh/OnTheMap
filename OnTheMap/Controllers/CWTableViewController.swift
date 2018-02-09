@@ -13,8 +13,7 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     let udacityInstance = UdacityAPI()
     let parseInstance = ParseAPI()
     let udacityModel = UdacityModel.sharedInstance
-    
-    var studentLocations: StudentArray = StudentArray(results: []) {
+    var parseModel = ParseModel.sharedInstance {
         didSet {
             self.tableView.reloadData()
         }
@@ -22,15 +21,6 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
-            
-            if let error = error as? CWError {
-                DispatchQueue.main.async {
-                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
-                }
-            } else {self.studentLocations = studentArray!}
-        })
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
@@ -43,23 +33,22 @@ class CWTableViewController: UITableViewController, HelperProtocol {
     }
     
     @IBAction func refresh(_ sender: Any) {
-       getData(parentView: self.view, parseSingleton: parseInstance, with: {(studentArray, error) in
-        
-            if let error = error as? CWError {
-                DispatchQueue.main.async {
-                    self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
-                }
+        getData(parentView: self.view, parseInstance: parseInstance) { (studentArray, error) in
+            if let studentArray = studentArray {
+                self.parseModel.studentArray = studentArray
             } else {
-                self.studentLocations = studentArray!
+                DispatchQueue.main.async {
+                    if let error = error as? CWError {
+                        self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
+                    }
+                }
+            }
         }
-        
-       
-       })
     }
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return studentLocations.results.count
+        return parseModel.studentArray.results.count
         
     }
     
@@ -69,14 +58,14 @@ class CWTableViewController: UITableViewController, HelperProtocol {
         checkAndOpen(parentViewController: self, urlString: cell.urlLabel.text!)
         
     }
-
+    
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cwCell",
                                                  for: indexPath) as! CWTableViewCell
         
-        if !studentLocations.results.isEmpty {
-            let studentItem = studentLocations.results[indexPath.row]
+        if !parseModel.studentArray.results.isEmpty {
+            let studentItem = parseModel.studentArray.results[indexPath.row]
             cell.nameLabel.text = (studentItem.firstName ?? "") + " " + (studentItem.lastName ?? "")
             cell.urlLabel.text = studentItem.mediaURL ?? ""
         }

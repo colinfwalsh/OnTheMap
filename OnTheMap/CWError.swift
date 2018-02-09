@@ -13,6 +13,7 @@ enum CWError: Error {
     case urlError
     case locationError
     case serverError
+    case invalidCredentials
 }
 
 extension CWError: CustomStringConvertible {
@@ -24,6 +25,8 @@ extension CWError: CustomStringConvertible {
             return "Cannot add the url.  Please add 'http://' or https://"
         case .locationError:
             return "Could not parse location entered.  Try another location or check your spelling."
+        case .invalidCredentials:
+            return "Your login credentials are incorrect.  Please check your username and password and try again."
         default:
             return "Cannot communicate with the server.  Try again soon"
         }
@@ -37,8 +40,10 @@ extension CWError: CustomStringConvertible {
             return "Invalid URL"
         case .locationError:
             return "Cannot get location"
+        case .invalidCredentials:
+            return "Invalid Credentials"
         default:
-            return "Server Error"
+            return "Network Error"
         }
     }
 }
