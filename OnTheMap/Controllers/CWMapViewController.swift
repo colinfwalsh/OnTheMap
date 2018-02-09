@@ -74,6 +74,17 @@ class CWMapViewController: UIViewController, HelperProtocol, MKMapViewDelegate {
         self.mapView.addAnnotations(annotationArray)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (tabBarController?.tabBar.isHidden)! {
+            tabBarController?.tabBar.isHidden = !(tabBarController?.tabBar.isHidden)!
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"

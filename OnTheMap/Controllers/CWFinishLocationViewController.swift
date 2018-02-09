@@ -53,11 +53,13 @@ class CWFinishLocationViewController: UIViewController, HelperProtocol, MKMapVie
                                                     
                                                     self.presentAlertWith(parentViewController: self, title: error.title, message: error.description)
                                                     return
+                                                } else {
+                                                    self.navigationController?.popToRootViewController(animated: true)
+                                                    self.dismiss(animated: true, completion: nil)
                                                 }
                                             }
         })
-        self.navigationController?.popToRootViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
+       
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
